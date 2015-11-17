@@ -1,0 +1,33 @@
+# Directories #
+/bin/
+/build/
+/eclipse/
+/.gradle/
+/gradle/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+ 
+# Windows image file caches
+Thumbs.db 
+
+######################
+# Eclipse
+######################
+ 
+*.pydevproject
+.metadata
+.project
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
