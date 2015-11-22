@@ -4,6 +4,9 @@
 /eclipse/
 /.gradle/
 /gradle/
+/saves/
+/logs/
+/config/
 
 # Package Files #
 *.jar

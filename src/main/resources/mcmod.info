@@ -1,8 +1,8 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "mod1",
+  "name": "MrCrayfish Tutorial",
+  "description": "MrCrayfish tutorial mod for Minecraft 1.8.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
