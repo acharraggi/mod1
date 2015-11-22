@@ -1,5 +1,6 @@
 package com.mikesilversides.mod1;
 
+import com.mikesilversides.mod1.init.TutorialBlocks;
 import com.mikesilversides.mod1.init.TutorialItems;
 import com.mikesilversides.mod1.proxy.CommonProxy;
 
@@ -18,6 +19,8 @@ public class TutorialMod {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
+		TutorialBlocks.init();
+		TutorialBlocks.register();
 		TutorialItems.init();
 		TutorialItems.register();
 	}
