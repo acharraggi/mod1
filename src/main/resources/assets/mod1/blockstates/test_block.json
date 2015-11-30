@@ -1,5 +1,5 @@
 {
-    "variance": {
+    "variants": {
         "normal": {"model": "mod1:test_block"}
      }
  }
