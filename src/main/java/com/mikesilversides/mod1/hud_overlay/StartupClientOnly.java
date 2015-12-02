@@ -28,10 +28,13 @@ public class StartupClientOnly
 
   public static void initClientOnly()
   {
+	  System.out.println("hud_overlay.initClientOnly called");
     // required in order for the renderer to know how to render your item.  Likely to change in the near future.
     //ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("minecraftbyexample:mbe40_hud_overlay_item", "inventory");
-	//ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("mod1:test_item", "inventory");
-	  ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(Reference.MOD_ID+":test_item", "inventory");
+    ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(Reference.MOD_ID+":"+StartupCommon.itemHUDactivator.getUnlocalizedName().substring(5), "inventory");
+    
+    //ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("mod1:test_item", "inventory");
+	//ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(Reference.MOD_ID+":test_item", "inventory");
 	  
 	  
     final int DEFAULT_ITEM_SUBTYPE = 0;

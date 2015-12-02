@@ -1,11 +1,16 @@
 package com.mikesilversides.mod1.hud_overlay;
 
+import org.lwjgl.opengl.GL11;
+
+import com.mikesilversides.mod1.Reference;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.lwjgl.opengl.GL11;
 
 /**
  * @author Nephroid
@@ -23,6 +28,11 @@ import org.lwjgl.opengl.GL11;
  */
 public class EventHandlerOverlay
 {
+	//private final static ResourceLocation mikesOverlay = new ResourceLocation(Reference.MOD_ID,
+	//        "/textures/gui/mikes_overlay.png");
+	/* This object draws text using the Minecraft font */
+    //FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
+	
   public EventHandlerOverlay(StatusBarRenderer i_HUDrenderer)
   {
     statusBarRenderer = i_HUDrenderer;
@@ -42,6 +52,7 @@ public class EventHandlerOverlay
 
   @SubscribeEvent(receiveCanceled=true)
   public void onEvent(RenderGameOverlayEvent.Pre event) {
+	//System.out.println("hud_overlay.onEvent(RenderGameOverlayEvent.Pre event) called");
     EntityPlayerSP entityPlayerSP = Minecraft.getMinecraft().thePlayer;
     if (entityPlayerSP == null) return;  // just in case
 
@@ -56,13 +67,35 @@ public class EventHandlerOverlay
         break;
       }
     }
-    //if (!foundInHotbar) return;
+    
+    /* Saving the current state of OpenGL so that I can restore it when I'm done */
+//    GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS); //Mike-temp
+//    GL11.glPushMatrix();
+//    GL11.glTranslatef(0, 0, 0);
+//    /* This generates the string that I want to draw. */
+//    String s = "Mod1 HUD test string";
+//    /* Draw the shadow string */
+//    /* Set the rendering color to white */
+//    //GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+//    fr.drawString(s, 2, 2, 0x5A2B00);  //0x5A2B00  0xFFFFFF
+//    //GL11.glTranslatef(2, fr.FONT_HEIGHT + 2 , 0);
+//    /* Set the rendering color to white */
+//    //GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+//    /* This method tells OpenGL to draw with the custom texture */
+//    //Minecraft.getMinecraft().renderEngine.bindTexture(mikesOverlay);  
+//    
+//    GL11.glPopMatrix(); 
+//    GL11.glPopAttrib(); //Mike
+    
+    if (!foundInHotbar) return;
 
     switch (event.type) {
       case HEALTH:
         statusBarRenderer.renderStatusBar(event.resolution.getScaledWidth(), event.resolution.getScaledHeight());        /* Call a helper method so that this method stays organized */
         /* Don't render the vanilla heart bar */
         event.setCanceled(true);
+        
+
         break;
 
       case ARMOR:
@@ -99,10 +132,12 @@ public class EventHandlerOverlay
    */
   @SubscribeEvent(receiveCanceled=true)
   public void onEvent(RenderGameOverlayEvent.Post event) {
-    
+	//System.out.println("hud_overlay.onEvent(RenderGameOverlayEvent.Post event) called");
     /* The matrix must be popped whenever it is pushed. In this example, I pushed
      * in the FOOD and AIR cases, so I have to pop in those cases here.
+     * 
      */
+
     switch (event.type) {
       case HEALTH:
         break;

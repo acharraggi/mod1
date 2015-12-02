@@ -22,11 +22,12 @@ public class StartupCommon
 
   public static void preInitCommon()
   {
+	  System.out.println("hud_overlay.preInitCommon called");
     // each instance of your item should have a name that is unique within your mod.  use lower case.
-    //itemHUDactivator = (ItemHUDactivator)(new ItemHUDactivator().setUnlocalizedName("mbe40_hud_overlay_item"));
-	itemHUDactivator = (ItemHUDactivator)(new ItemHUDactivator().setUnlocalizedName("test_item"));
-    //GameRegistry.registerItem(itemHUDactivator, "mbe40_hud_overlay_item");
-	GameRegistry.registerItem(itemHUDactivator, "test_item");
+    itemHUDactivator = (ItemHUDactivator)(new ItemHUDactivator().setUnlocalizedName("mbe40_hud_overlay_item"));
+	//itemHUDactivator = (ItemHUDactivator)(new ItemHUDactivator().setUnlocalizedName("test_item"));
+    GameRegistry.registerItem(itemHUDactivator, "mbe40_hud_overlay_item");
+	//GameRegistry.registerItem(itemHUDactivator, "test_item");
   }
 
   public static void initCommon()

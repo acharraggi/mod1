@@ -25,6 +25,7 @@ public class ItemHUDactivator extends Item
 {
   public ItemHUDactivator()
   {
+	  System.out.println("hud_overlay.ItemHUDactivator called");
     this.setMaxStackSize(1);
     this.setCreativeTab(CreativeTabs.tabMisc);   // the item will appear on the Miscellaneous tab in creative
   }
@@ -35,6 +36,7 @@ public class ItemHUDactivator extends Item
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
     final int FIRST_HOTBAR_SLOT_NUMBER = 0;
     final int LAST_HOTBAR_SLOT_NUMBER = 8;
+    //System.out.println("hud_overlay.onUpdate called");
 
     if (itemSlot < FIRST_HOTBAR_SLOT_NUMBER || itemSlot > LAST_HOTBAR_SLOT_NUMBER) return;
     if (worldIn.isRemote) return;

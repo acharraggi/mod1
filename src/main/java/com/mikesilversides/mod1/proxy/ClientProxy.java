@@ -1,4 +1,5 @@
 package com.mikesilversides.mod1.proxy;
+// added HUD init
 
 import com.mikesilversides.mod1.init.TutorialBlocks;
 import com.mikesilversides.mod1.init.TutorialItems;
@@ -16,24 +17,28 @@ public class ClientProxy extends CommonProxy{
 	   */
 	  public void preInit()
 	  {
+		  System.out.println("ClientProxy.preInit called");
 	    super.preInit();
 	    com.mikesilversides.mod1.hud_overlay.StartupClientOnly.preInitClientOnly();
 	  }
 	  
 	  public void init()
 	  {
+		  System.out.println("ClientProxy.init called");
 	    super.init();
 	    com.mikesilversides.mod1.hud_overlay.StartupClientOnly.initClientOnly();
 	  }
 
 	  public void postInit()
 	  {
+		  System.out.println("ClientProxy.postInit called");
 	    super.postInit();
 	    com.mikesilversides.mod1.hud_overlay.StartupClientOnly.postInitClientOnly();
 	  }
 	
 	  @Override
 	  public boolean playerIsInCreativeMode(EntityPlayer player) {
+		  System.out.println("ClientProxy.playerIsInCreativeMode called");
 	    if (player instanceof EntityPlayerMP) {
 	      EntityPlayerMP entityPlayerMP = (EntityPlayerMP)player;
 	      return entityPlayerMP.theItemInWorldManager.isCreative();
