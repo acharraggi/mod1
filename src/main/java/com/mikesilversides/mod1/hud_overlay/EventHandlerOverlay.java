@@ -4,11 +4,16 @@ import org.lwjgl.opengl.GL11;
 
 import com.mikesilversides.mod1.Reference;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -32,6 +37,8 @@ public class EventHandlerOverlay
 	//        "/textures/gui/mikes_overlay.png");
 	/* This object draws text using the Minecraft font */
     //FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
+	
+	private Boolean alreadyDone = false;
 	
   public EventHandlerOverlay(StatusBarRenderer i_HUDrenderer)
   {
@@ -89,6 +96,26 @@ public class EventHandlerOverlay
     
     if (!foundInHotbar) return;
 
+    if(!alreadyDone) {
+    	 System.out.println("inside look at handler");
+    	alreadyDone = true;  // only do this once.
+    	//movingObjectPosition mop = Minecraft.getMinecraft().renderViewEntity.rayTrace(200, 1.0F);
+    	MovingObjectPosition mop = Minecraft.getMinecraft().getRenderViewEntity().rayTrace(80d, 1.0F);
+    	if(mop != null)
+    	{
+    	    //int blockHitSide = mop.sideHit;
+    		EnumFacing blockHitSide = mop.sideHit;
+    		
+    	    //Block blockLookingAt = worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ) ;
+    		BlockPos blockP = mop.getBlockPos();
+    		
+    		System.out.println("looking at X: "+blockP.getX());
+    		System.out.println("looking at Y: "+blockP.getY());
+    		System.out.println("looking at Z: "+blockP.getZ());
+    	    //Block blockLookingAt = World.getBlock(blockP.getX(), blockP.getY(), blockP.getZ()) ;
+    	    //Block blockLookingAt = Minecraft.getMinecraft().theWorld.canBlockBePlaced(p_175716_1_, p_175716_2_, p_175716_3_, p_175716_4_, p_175716_5_, p_175716_6_)
+    	}
+    }
     switch (event.type) {
       case HEALTH:
         statusBarRenderer.renderStatusBar(event.resolution.getScaledWidth(), event.resolution.getScaledHeight());        /* Call a helper method so that this method stays organized */
