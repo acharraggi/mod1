@@ -23,15 +23,17 @@ public class TutorialMod {
 		TutorialBlocks.register();
 		TutorialItems.init();
 		TutorialItems.register();
+		proxy.preInit();   //Mike- add proxy init's to get stuff working
 	}
 	
 	@EventHandler
 	public void Init(FMLInitializationEvent event){
+		proxy.init();
 		proxy.registerRenders();
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event){
-		
+		proxy.postInit();
 	}
 }
