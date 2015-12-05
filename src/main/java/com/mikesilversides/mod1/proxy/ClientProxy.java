@@ -20,6 +20,7 @@ public class ClientProxy extends CommonProxy{
 		  System.out.println("ClientProxy.preInit called");
 	    super.preInit();
 	    com.mikesilversides.mod1.hud_overlay.StartupClientOnly.preInitClientOnly();
+	    com.mikesilversides.mod1.airstrike.StartupClientOnly.preInitClientOnly();
 	  }
 	  
 	  public void init()
@@ -27,6 +28,7 @@ public class ClientProxy extends CommonProxy{
 		  System.out.println("ClientProxy.init called");
 	    super.init();
 	    com.mikesilversides.mod1.hud_overlay.StartupClientOnly.initClientOnly();
+	    com.mikesilversides.mod1.airstrike.StartupClientOnly.initClientOnly();
 	  }
 
 	  public void postInit()
@@ -34,6 +36,7 @@ public class ClientProxy extends CommonProxy{
 		  System.out.println("ClientProxy.postInit called");
 	    super.postInit();
 	    com.mikesilversides.mod1.hud_overlay.StartupClientOnly.postInitClientOnly();
+	    com.mikesilversides.mod1.airstrike.StartupClientOnly.postInitClientOnly();
 	  }
 	
 	  @Override

@@ -1,8 +1,12 @@
 package com.mikesilversides.mod1.hud_overlay;
 
+import java.util.Random;
+
 import org.lwjgl.opengl.GL11;
 
 import com.mikesilversides.mod1.Reference;
+import com.mikesilversides.mod1.airstrike.StartupCommon;
+import com.mikesilversides.mod1.airstrike.AirstrikeMessageToServer;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -13,6 +17,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -38,7 +43,10 @@ public class EventHandlerOverlay
 	/* This object draws text using the Minecraft font */
     //FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
 	
-	private Boolean alreadyDone = false;
+	//private Boolean alreadyDone = false;
+	private long startTime = 0;
+	private static final long waitTime = 20000;   // in ms
+	
 	
   public EventHandlerOverlay(StatusBarRenderer i_HUDrenderer)
   {
@@ -69,7 +77,7 @@ public class EventHandlerOverlay
     final int LAST_HOTBAR_SLOT_PLUS_ONE = FIRST_HOTBAR_SLOT + entityPlayerSP.inventory.getHotbarSize();
     for (int i = FIRST_HOTBAR_SLOT; i < LAST_HOTBAR_SLOT_PLUS_ONE; ++i) {
       ItemStack slotItemStack = entityPlayerSP.inventory.getStackInSlot(i);
-      if (slotItemStack != null && slotItemStack.getItem() == StartupCommon.itemHUDactivator) {
+      if (slotItemStack != null && slotItemStack.getItem() == com.mikesilversides.mod1.hud_overlay.StartupCommon.itemHUDactivator) {
         foundInHotbar = true;
         break;
       }
@@ -94,40 +102,69 @@ public class EventHandlerOverlay
 //    GL11.glPopMatrix(); 
 //    GL11.glPopAttrib(); //Mike
     
-    if (!foundInHotbar) return;
-
-    if(!alreadyDone) {
-    	 System.out.println("inside look at handler");
-    	alreadyDone = true;  // only do this once.
-    	//movingObjectPosition mop = Minecraft.getMinecraft().renderViewEntity.rayTrace(200, 1.0F);
-    	MovingObjectPosition mop = Minecraft.getMinecraft().getRenderViewEntity().rayTrace(80d, 1.0F);
-    	if(mop != null)
-    	{
-    	    //int blockHitSide = mop.sideHit;
-    		EnumFacing blockHitSide = mop.sideHit;
-    		
-    	    //Block blockLookingAt = worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ) ;
-    		BlockPos blockP = mop.getBlockPos();
-    		
-    		System.out.println("looking at X: "+blockP.getX());
-    		System.out.println("looking at Y: "+blockP.getY());
-    		System.out.println("looking at Z: "+blockP.getZ());
-    	    //Block blockLookingAt = World.getBlock(blockP.getX(), blockP.getY(), blockP.getZ()) ;
-    	    //Block blockLookingAt = Minecraft.getMinecraft().theWorld.canBlockBePlaced(p_175716_1_, p_175716_2_, p_175716_3_, p_175716_4_, p_175716_5_, p_175716_6_)
-    	}
+    
+    if (!foundInHotbar) {
+    	//alreadyDone = false;
+    	return;
     }
+
+    //if(!alreadyDone) {
+    	if(startTime == 0) {
+    		startTime = Minecraft.getMinecraft().getSystemTime();
+    		return;
+    	}
+    	long currentTime = Minecraft.getMinecraft().getSystemTime();
+    	if(currentTime - waitTime > startTime) {
+	    	//alreadyDone = true;  // only do this once per waitTime
+	    	startTime = 0;
+	    	Vec3 targetLocation;
+	    	
+	    	//sample found at: http://jabelarminecraft.blogspot.ca/p/minecraft-forge-172-finding-block.html
+	    	//movingObjectPosition mop = Minecraft.getMinecraft().renderViewEntity.rayTrace(200, 1.0F);
+//	    	MovingObjectPosition mop = Minecraft.getMinecraft().getRenderViewEntity().rayTrace(40d, 1.0F);
+//	    	if(mop != null)
+//	    	{
+//	    	    //int blockHitSide = mop.sideHit;
+//	    		//EnumFacing blockHitSide = mop.sideHit;
+//	    	    //Block blockLookingAt = worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ) ;
+//	    		BlockPos blockP = mop.getBlockPos();
+//	    		System.out.println("looking at X: "+blockP.getX());
+//	    		System.out.println("looking at Y: "+blockP.getY());
+//	    		System.out.println("looking at Z: "+blockP.getZ());
+//	    		
+//	    	    targetLocation = new Vec3(blockP.getX()+ 0.5, blockP.getY() + 1.1, blockP.getZ() + 0.5);
+//	    	}
+//	    	else {
+	    		final float PARTIAL_TICKS = 1.0F;
+	    		//Vec3 playerLook = playerIn.getLookVec();
+	    		Vec3 playerLook = Minecraft.getMinecraft().thePlayer.getLookVec();
+	    	    Vec3 playerFeetPosition = Minecraft.getMinecraft().thePlayer.getPositionEyes(PARTIAL_TICKS).subtract(0, Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0);
+	    	    final double TARGET_DISTANCE = 5.0;
+	    	    final double HEIGHT_ABOVE_FEET = 0.1;
+	    	    targetLocation = playerFeetPosition.addVector(playerLook.xCoord * TARGET_DISTANCE, HEIGHT_ABOVE_FEET,
+	    	                                                       playerLook.zCoord * TARGET_DISTANCE);
+	    	//}
+    	    //Random random = new Random();
+    	    AirstrikeMessageToServer.Projectile [] choices = AirstrikeMessageToServer.Projectile.values();
+    	    AirstrikeMessageToServer.Projectile projectile = choices[2];  //PrimedTNT
+
+    	    AirstrikeMessageToServer airstrikeMessageToServer = new AirstrikeMessageToServer(projectile, targetLocation);
+    	    com.mikesilversides.mod1.airstrike.StartupCommon.simpleNetworkWrapper.sendToServer(airstrikeMessageToServer);
+    	}
+    //}
+    
     switch (event.type) {
       case HEALTH:
         statusBarRenderer.renderStatusBar(event.resolution.getScaledWidth(), event.resolution.getScaledHeight());        /* Call a helper method so that this method stays organized */
         /* Don't render the vanilla heart bar */
-        event.setCanceled(true);
+        //event.setCanceled(true);
         
 
         break;
 
       case ARMOR:
         /* Don't render the vanilla armor bar, it's part of the status bar in the HEALTH event */
-        event.setCanceled(true);
+        //event.setCanceled(true);
         break;
 
       case HOTBAR:

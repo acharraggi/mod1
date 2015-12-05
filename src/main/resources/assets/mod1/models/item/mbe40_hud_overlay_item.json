@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "minecraftbyexample:items/mbe40_hud_overlay_item_icon"
+        "layer0": "mod1:items/mbe40_hud_overlay_item_icon"
     },
     "display": {
         "thirdperson": {

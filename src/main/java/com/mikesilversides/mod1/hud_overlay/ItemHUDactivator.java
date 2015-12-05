@@ -25,7 +25,7 @@ public class ItemHUDactivator extends Item
 {
   public ItemHUDactivator()
   {
-	  System.out.println("hud_overlay.ItemHUDactivator called");
+	//System.out.println("hud_overlay.ItemHUDactivator called");
     this.setMaxStackSize(1);
     this.setCreativeTab(CreativeTabs.tabMisc);   // the item will appear on the Miscellaneous tab in creative
   }
@@ -41,10 +41,11 @@ public class ItemHUDactivator extends Item
     if (itemSlot < FIRST_HOTBAR_SLOT_NUMBER || itemSlot > LAST_HOTBAR_SLOT_NUMBER) return;
     if (worldIn.isRemote) return;
     if (!(entityIn instanceof EntityPlayerMP)) return;
-    EntityPlayerMP entityPlayerMP = (EntityPlayerMP) entityIn;
+/* Mike-don't change survival mode   
+   EntityPlayerMP entityPlayerMP = (EntityPlayerMP) entityIn;
     if (entityPlayerMP.theItemInWorldManager.getGameType() != WorldSettings.GameType.SURVIVAL) {
       entityPlayerMP.setGameType(WorldSettings.GameType.SURVIVAL);
-    }
+    }*/
   }
 
   // adds 'tooltip' text
