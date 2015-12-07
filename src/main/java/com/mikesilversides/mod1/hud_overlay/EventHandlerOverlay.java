@@ -47,6 +47,10 @@ public class EventHandlerOverlay
 	private long startTime = 0;
 	private static final long waitTime = 20000;   // in ms
 	
+	private String viewerName = null;
+	private long startNameTime = 0;
+	private static final long waitNameTime = 8000;   // in ms
+	
 	
   public EventHandlerOverlay(StatusBarRenderer i_HUDrenderer)
   {
@@ -141,21 +145,32 @@ public class EventHandlerOverlay
 	    	    Vec3 playerFeetPosition = Minecraft.getMinecraft().thePlayer.getPositionEyes(PARTIAL_TICKS).subtract(0, Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0);
 	    	    final double TARGET_DISTANCE = 5.0;
 	    	    final double HEIGHT_ABOVE_FEET = 0.1;
-	    	    targetLocation = playerFeetPosition.addVector(playerLook.xCoord * TARGET_DISTANCE, HEIGHT_ABOVE_FEET,
-	    	                                                       playerLook.zCoord * TARGET_DISTANCE);
+	    	    targetLocation = playerFeetPosition;
+//	    	    targetLocation = playerFeetPosition.addVector(playerLook.xCoord * TARGET_DISTANCE, HEIGHT_ABOVE_FEET,
+//	    	                                                       playerLook.zCoord * TARGET_DISTANCE);
 	    	//}
     	    //Random random = new Random();
     	    AirstrikeMessageToServer.Projectile [] choices = AirstrikeMessageToServer.Projectile.values();
-    	    AirstrikeMessageToServer.Projectile projectile = choices[2];  //PrimedTNT
+    	    AirstrikeMessageToServer.Projectile projectile = choices[2];  //0=pig, 1=snowball, 2=PrimedTNT, 4=egg
 
     	    AirstrikeMessageToServer airstrikeMessageToServer = new AirstrikeMessageToServer(projectile, targetLocation);
     	    com.mikesilversides.mod1.airstrike.StartupCommon.simpleNetworkWrapper.sendToServer(airstrikeMessageToServer);
+    	    
+    	    // initiate viewer name display
+    	    viewerName = "Spanky";
+    	    startNameTime = Minecraft.getMinecraft().getSystemTime();
+    	}
+    	
+    	long currentNameTime = Minecraft.getMinecraft().getSystemTime();
+    	if(currentNameTime - waitNameTime > startNameTime) {
+    		startNameTime = 0;
+    		viewerName = null;
     	}
     //}
     
     switch (event.type) {
       case HEALTH:
-        statusBarRenderer.renderStatusBar(event.resolution.getScaledWidth(), event.resolution.getScaledHeight());        /* Call a helper method so that this method stays organized */
+        //statusBarRenderer.renderStatusBar(event.resolution.getScaledWidth(), event.resolution.getScaledHeight());        /* Call a helper method so that this method stays organized */
         /* Don't render the vanilla heart bar */
         //event.setCanceled(true);
         
@@ -180,6 +195,7 @@ public class EventHandlerOverlay
          *
          * The line below turns the hotbar gold
          */
+        statusBarRenderer.renderStatusBar(viewerName /*event.resolution.getScaledWidth(), event.resolution.getScaledHeight()*/);        /* Call a helper method so that this method stays organized */
         GL11.glColor3f(1, 0.7f, 0);
         break;
 

@@ -37,10 +37,11 @@ public class StatusBarRenderer extends Gui {
    * 
    *   "resources/assets/MODID/textures/gui/advanced_overlay.png"
    */
-  private final static ResourceLocation overlayBar = new ResourceLocation(Reference.MOD_ID,
-          "/textures/gui/mbe40_hud_overlay.png");
+//  private final static ResourceLocation overlayBar = new ResourceLocation(Reference.MOD_ID,
+//          "/textures/gui/mbe40_hud_overlay.png");
   private final static ResourceLocation mikesOverlay = new ResourceLocation(Reference.MOD_ID,
-          "/textures/gui/mikes_overlay.png");
+		  "/textures/gui/qrcode.mikesilversides.png");
+//          "/textures/gui/mikes_overlay.png");
 
   /* These two variables describe the size of the bar */
   private final static int BAR_WIDTH = 81;
@@ -63,7 +64,7 @@ public class StatusBarRenderer extends Gui {
   }
 
   /* This helper method will render the bar */
-  public void renderStatusBar(int screenWidth, int screenHeight) {
+  public void renderStatusBar(String viewerName /*int screenWidth, int screenHeight*/) {
 	//System.out.println("renderStatusBar called");
     /* These are the variables that contain world and player information */
     //World world = mc.theWorld;
@@ -80,14 +81,19 @@ public class StatusBarRenderer extends Gui {
     GL11.glPushMatrix();
     GL11.glTranslatef(0, 0, 0);
     /* This generates the string that I want to draw. */
-    String s = "Mod1 HUD test string";
+    String s = "QR code URL: www.mikesilversides.com";
     fr.drawString(s, 2, 2, 0xFFFFFF);  //0x5A2B00  0xFFFFFF
     GL11.glTranslatef(0, fr.FONT_HEIGHT + 2 , 0);
 
-    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F); 
+    /*GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F); */
     mc.renderEngine.bindTexture(mikesOverlay);
-    //GL11.glTranslatef(0, 25, 0);
-    drawTexturedModalRect(0, 0, 0, 0, 64, 64);
+    drawTexturedModalRect(0, 0, 0, 0, 68, 68);  //was 68
+    
+    if(viewerName != null) {
+    	s = "This TNT Glitch brought to you by: "+viewerName;
+    	fr.drawString(s, 0, fr.FONT_HEIGHT + 2 + 68, 0xFF0000);  //red string
+    }
+    
     GL11.glPopMatrix(); //Mike
     GL11.glPopAttrib();
     //GL11.glPushMatrix(); //Mike

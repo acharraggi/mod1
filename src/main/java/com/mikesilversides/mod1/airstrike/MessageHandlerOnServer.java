@@ -1,6 +1,8 @@
 package com.mikesilversides.mod1.airstrike;
 //package minecraftbyexample.mbe60_network_messages;
 
+//import net.minecraft.block.BlockDirt;
+
 import com.google.common.collect.ImmutableList;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.Entity;
@@ -12,6 +14,7 @@ import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -102,16 +105,29 @@ public class MessageHandlerOnServer implements IMessageHandler<AirstrikeMessageT
     for (int i = 0; i < numberOfProjectiles; ++i) {
       World world = sendingPlayer.worldObj;
 
-      final double MAX_HORIZONTAL_SPREAD = 2.0; //Mike - was: 4.0
-      final double MAX_VERTICAL_SPREAD = 5.0;  //Mike - was: 20.0
-      final double RELEASE_HEIGHT_ABOVE_TARGET = 1;  //Mike - was: 40
+      final double MAX_HORIZONTAL_SPREAD = 0.0; //Mike - was: 4.0
+      final double MAX_VERTICAL_SPREAD = 0.0;  //Mike - was: 20.0
+      final double RELEASE_HEIGHT_ABOVE_TARGET = 0.0;  //Mike - was: 40
       double xOffset = (random.nextDouble() * 2 - 1) * MAX_HORIZONTAL_SPREAD;
-      double zOffset = (random.nextDouble() * 2 - 1) * MAX_HORIZONTAL_SPREAD;
+      //double zOffset = (random.nextDouble() * 2 - 1) * MAX_HORIZONTAL_SPREAD;
+      double zOffset = 0.0;
       double yOffset = RELEASE_HEIGHT_ABOVE_TARGET + (random.nextDouble() * 2 - 1) * MAX_VERTICAL_SPREAD;
       Vec3 releasePoint = message.getTargetCoordinates().addVector(xOffset, yOffset, zOffset);
       float yaw = random.nextFloat() * 360;
       float pitch = random.nextFloat() * 360;
 
+      System.out.println("target x="+releasePoint.xCoord+", "+	"y="+releasePoint.yCoord+", "+
+    		  "z="+releasePoint.zCoord);
+      
+      // the following code will destroy a block under the player, 
+      // but doesn't match entity creation position so TNT doesn't create in the hole
+      // Entity's use real numbers, not int's for position.
+//	  Vec3 rP = message.getTargetCoordinates().addVector(0.0, -0.5, 0);
+//	  BlockPos pos = new BlockPos(rP);
+//	  releasePoint = new Vec3(pos.getX(),pos.getY(),pos.getY());
+//      world.destroyBlock(pos, false);
+
+  	
       Entity entity;
       switch (message.getProjectile()) {
         case PIG: {
@@ -124,7 +140,12 @@ public class MessageHandlerOnServer implements IMessageHandler<AirstrikeMessageT
           break;
         }
         case TNT: {
-          entity = new EntityTNTPrimed(world, releasePoint.xCoord, releasePoint.yCoord, releasePoint.zCoord, sendingPlayer);
+        	//BlockDirt signBlock = new BlockDirt();
+        	//Vec3 p = message.getTargetCoordinates().addVector(0.0, 0.0, 1.0);
+//        	BlockPos pos = new BlockPos(releasePoint);
+//        	world.setBlockToAir(pos);
+//        	entity = new EntityTNTPrimed(world, p.xCoord, p.yCoord, p.zCoord, sendingPlayer);
+            entity = new EntityTNTPrimed(world, releasePoint.xCoord, releasePoint.yCoord, releasePoint.zCoord, sendingPlayer);
           break;
         }
         case SNOWMAN: {
