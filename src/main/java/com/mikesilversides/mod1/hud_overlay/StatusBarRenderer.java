@@ -92,6 +92,9 @@ public class StatusBarRenderer extends Gui {
     if(viewerName != null) {
     	s = "This TNT Glitch brought to you by: "+viewerName;
     	fr.drawString(s, 0, fr.FONT_HEIGHT + 2 + 68, 0xFF0000);  //red string
+    	//mc.ingameGUI.getChatGUI().drawString(fr, s, 0, fr.FONT_HEIGHT + 25 + 68, 0x00FF00);
+    	
+    	//mc.ingameGUI.getChatGUI().printChatMessage(p_146227_1_);
     }
     
     GL11.glPopMatrix(); //Mike

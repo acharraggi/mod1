@@ -157,14 +157,17 @@ public class EventHandlerOverlay
     	    com.mikesilversides.mod1.airstrike.StartupCommon.simpleNetworkWrapper.sendToServer(airstrikeMessageToServer);
     	    
     	    // initiate viewer name display
-    	    viewerName = "Spanky";
-    	    startNameTime = Minecraft.getMinecraft().getSystemTime();
+    	    //viewerName = "Spanky";
+    	    //startNameTime = Minecraft.getMinecraft().getSystemTime();
+    	    Minecraft.getMinecraft().thePlayer.sendChatMessage("This TNT Glitch brought to you by: Spanky");
     	}
     	
-    	long currentNameTime = Minecraft.getMinecraft().getSystemTime();
-    	if(currentNameTime - waitNameTime > startNameTime) {
-    		startNameTime = 0;
-    		viewerName = null;
+    	if(startNameTime > 0) {
+	    	long currentNameTime = Minecraft.getMinecraft().getSystemTime();
+	    	if(currentNameTime - waitNameTime > startNameTime) {
+	    		startNameTime = 0;
+	    		viewerName = null;
+	    	}
     	}
     //}
     
