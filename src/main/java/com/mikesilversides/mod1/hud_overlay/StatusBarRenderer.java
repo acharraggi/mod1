@@ -13,6 +13,7 @@ import com.mikesilversides.mod1.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -39,9 +40,14 @@ public class StatusBarRenderer extends Gui {
    */
 //  private final static ResourceLocation overlayBar = new ResourceLocation(Reference.MOD_ID,
 //          "/textures/gui/mbe40_hud_overlay.png");
-  private final static ResourceLocation mikesOverlay = new ResourceLocation(Reference.MOD_ID,
-		  "/textures/gui/qrcode.mikesilversides.png");
+	
+//  private final static ResourceLocation mikesOverlay = new ResourceLocation(Reference.MOD_ID,
+//		  "/textures/gui/qrcode-ms.png");
+	
 //          "/textures/gui/mikes_overlay.png");
+  
+	private final static ResourceLocation mikesOverlay = 
+			new ModelResourceLocation(Reference.MOD_ID+":textures/gui/qrcode-ms.png");
 
   /* These two variables describe the size of the bar */
   private final static int BAR_WIDTH = 81;

@@ -1,14 +1,14 @@
 [
 {
   "modid": "mod1",
-  "name": "MrCrayfish Tutorial",
-  "description": "MrCrayfish tutorial mod for Minecraft 1.8.",
+  "name": "mod1 prototype",
+  "description": "Prototyping mod for Minecraft ${version}. Watch out for TNT blocks!",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "http://www.mikesilversides.com",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Mike Silversides"],
+  "credits": "The Forge and FML guys, MrCrayfish, MinecraftByExample.",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
