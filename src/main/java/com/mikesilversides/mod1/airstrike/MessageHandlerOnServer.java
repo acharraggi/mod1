@@ -121,11 +121,11 @@ public class MessageHandlerOnServer implements IMessageHandler<AirstrikeMessageT
       
       // the following code will destroy a block under the player, 
       // Entity's use real numbers, blocks use Int's.
-	  Vec3 rP = message.getTargetCoordinates().addVector(0.0, -0.5, 0);
-	  BlockPos pos = new BlockPos(rP);
-	  releasePoint = new Vec3(pos.getX()+0.5,pos.getY(),pos.getZ()+0.5);
+//	  Vec3 rP = message.getTargetCoordinates().addVector(0.0, -0.5, 0);
+//	  BlockPos pos = new BlockPos(rP);
+//	  releasePoint = new Vec3(pos.getX()+0.5,pos.getY(),pos.getZ()+0.5);
+//      world.destroyBlock(pos, false);
 	  // I've noticed that if the player is looking down they fall into the hole.
-      world.destroyBlock(pos, false);
   	
       Entity entity;
       switch (message.getProjectile()) {
