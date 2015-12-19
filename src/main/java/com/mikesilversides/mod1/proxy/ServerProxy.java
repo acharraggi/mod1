@@ -3,6 +3,7 @@ package com.mikesilversides.mod1.proxy;
 
 import com.mikesilversides.mod1.init.TutorialBlocks;
 import com.mikesilversides.mod1.init.TutorialItems;
+import com.mikesilversides.mod1.ServerTest.StartupServer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -19,18 +20,21 @@ public class ServerProxy extends CommonProxy{
 	  {
 		System.out.println("ServerProxy.preInit called");
 	    super.preInit();
+	    //StartupServer.preInitServer();
 	  }
 	  
 	  public void init()
 	  {
 		System.out.println("ServerProxy.init called");
 	    super.init();
+	    //StartupServer.initServer();
 	  }
 
 	  public void postInit()
 	  {
 		System.out.println("ServerProxy.postInit called");
 	    super.postInit();
+	    //StartupServer.postInitServer();
 	  }
 	
 	  @Override

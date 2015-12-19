@@ -5,6 +5,11 @@ package com.mikesilversides.mod1.airstrike;
 
 import com.google.common.collect.ImmutableList;
 import io.netty.channel.ChannelHandlerContext;
+//import net.minecraft.block.Block;
+//import net.minecraft.block.BlockContainer;
+//import net.minecraft.block.BlockSign;
+import net.minecraft.tileentity.TileEntitySign;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.monster.EntitySnowman;
@@ -15,6 +20,8 @@ import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -92,6 +99,11 @@ public class MessageHandlerOnServer implements IMessageHandler<AirstrikeMessageT
     for (EntityPlayerMP player : (List<EntityPlayerMP>)minecraftServer.getConfigurationManager().playerEntityList) {
       TargetEffectMessageToClient msg = new TargetEffectMessageToClient(message.getTargetCoordinates());   // must generate a fresh message for every player!
       if (dimension == player.dimension) {
+    	//player.addChatMessage();
+//TODO: this won't work, only checks when msg exchanged. Need ServerTimeTick or something
+//    	if(Math.floorMod(Minecraft.getMinecraft().getSystemTime(), 30) == 0) {
+//    		player.addChatMessage(new ChatComponentTranslation("msg.message_name.txt"));
+//    	}
         StartupCommon.simpleNetworkWrapper.sendTo(msg, player);
       }
     }
@@ -167,7 +179,19 @@ public class MessageHandlerOnServer implements IMessageHandler<AirstrikeMessageT
         }
       }
 
-      world.spawnEntityInWorld(entity);
+      world.spawnEntityInWorld(entity);  
+      
+      // try adding sign
+      //BlockSign mySign = new BlockSign();
+      /*TileEntitySign mySign = new TileEntitySign();
+      mySign.setWorldObj(world);
+      mySign.setPlayer(sendingPlayer);
+	  BlockPos pos = new BlockPos(releasePoint);
+      mySign.setPos(pos);
+      mySign.updateContainingBlockInfo();
+      world.addTileEntity(mySign);*/
+      // is that enough to create the sign? Nope - didn't see it
+  
       final float VOLUME = 10000.0F;
       final float PITCH = 0.8F + random.nextFloat() * 0.2F;
       world.playSoundEffect(releasePoint.xCoord, releasePoint.yCoord, releasePoint.zCoord, "ambient.weather.thunder", VOLUME, PITCH);

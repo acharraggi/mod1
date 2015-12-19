@@ -45,11 +45,11 @@ public class EventHandlerOverlay
 	
 	//private Boolean alreadyDone = false;
 	private long startTime = 0;
-	private static final long waitTime = 20000;   // in ms
+	private static final long waitTime = 25000;   // in ms
 	
 	private String viewerName = null;
-	private long startNameTime = 0;
-	private static final long waitNameTime = 8000;   // in ms
+//	private long startNameTime = 0;
+//	private static final long waitNameTime = 8000;   // in ms
 	
 	
   public EventHandlerOverlay(StatusBarRenderer i_HUDrenderer)
@@ -106,11 +106,12 @@ public class EventHandlerOverlay
 //    GL11.glPopMatrix(); 
 //    GL11.glPopAttrib(); //Mike
     
-    
-    if (!foundInHotbar) {
-    	//alreadyDone = false;
-    	return;
-    }
+
+// have TNT mode always active
+//    if (!foundInHotbar) {
+//    	//alreadyDone = false;
+//    	return;
+//    }
 
     //if(!alreadyDone) {
     	if(startTime == 0) {
@@ -162,13 +163,13 @@ public class EventHandlerOverlay
     	    Minecraft.getMinecraft().thePlayer.sendChatMessage("This TNT Glitch brought to you by: Spanky");
     	}
     	
-    	if(startNameTime > 0) {
-	    	long currentNameTime = Minecraft.getMinecraft().getSystemTime();
-	    	if(currentNameTime - waitNameTime > startNameTime) {
-	    		startNameTime = 0;
-	    		viewerName = null;
-	    	}
-    	}
+//    	if(startNameTime > 0) {
+//	    	long currentNameTime = Minecraft.getMinecraft().getSystemTime();
+//	    	if(currentNameTime - waitNameTime > startNameTime) {
+//	    		startNameTime = 0;
+//	    		viewerName = null;
+//	    	}
+//    	}
     //}
     
     switch (event.type) {
@@ -198,7 +199,7 @@ public class EventHandlerOverlay
          *
          * The line below turns the hotbar gold
          */
-        statusBarRenderer.renderStatusBar(viewerName /*event.resolution.getScaledWidth(), event.resolution.getScaledHeight()*/);        /* Call a helper method so that this method stays organized */
+        statusBarRenderer.renderStatusBar(/*viewerName, event.resolution.getScaledWidth(), event.resolution.getScaledHeight()*/);        /* Call a helper method so that this method stays organized */
         GL11.glColor3f(1, 0.7f, 0);
         break;
 

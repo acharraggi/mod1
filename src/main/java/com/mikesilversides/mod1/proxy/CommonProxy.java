@@ -8,8 +8,10 @@ public abstract class CommonProxy {
 	   */
 	  public void preInit()
 	  {
+		  com.mikesilversides.mod1.mbe70_configuration.StartupCommon.preInitCommon();
 		  com.mikesilversides.mod1.hud_overlay.StartupCommon.preInitCommon();
 		  com.mikesilversides.mod1.airstrike.StartupCommon.preInitCommon();
+		  com.mikesilversides.mod1.ServerTest.StartupServer.preInitServer();
 	  }
 	  
 	  /**
@@ -18,8 +20,10 @@ public abstract class CommonProxy {
 	   */
 	  public void init()
 	  {
+		  com.mikesilversides.mod1.mbe70_configuration.StartupCommon.initCommon();
 		  com.mikesilversides.mod1.hud_overlay.StartupCommon.initCommon();
 		  com.mikesilversides.mod1.airstrike.StartupCommon.initCommon();
+		  com.mikesilversides.mod1.ServerTest.StartupServer.initServer();
 	  }
 	  
 	  /**
@@ -27,8 +31,10 @@ public abstract class CommonProxy {
 	   */
 	  public void postInit()
 	  {
+		  com.mikesilversides.mod1.mbe70_configuration.StartupCommon.postInitCommon();
 		  com.mikesilversides.mod1.hud_overlay.StartupCommon.postInitCommon();
 		  com.mikesilversides.mod1.airstrike.StartupCommon.postInitCommon();
+		  com.mikesilversides.mod1.ServerTest.StartupServer.postInitServer();
 	  }
 	  
 	  // helper to determine whether the given player is in creative mode

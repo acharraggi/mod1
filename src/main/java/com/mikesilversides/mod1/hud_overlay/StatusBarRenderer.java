@@ -70,7 +70,7 @@ public class StatusBarRenderer extends Gui {
   }
 
   /* This helper method will render the bar */
-  public void renderStatusBar(String viewerName /*int screenWidth, int screenHeight*/) {
+  public void renderStatusBar(/*String viewerName int screenWidth, int screenHeight*/) {
 	//System.out.println("renderStatusBar called");
     /* These are the variables that contain world and player information */
     //World world = mc.theWorld;
@@ -95,13 +95,13 @@ public class StatusBarRenderer extends Gui {
     mc.renderEngine.bindTexture(mikesOverlay);
     drawTexturedModalRect(0, 0, 0, 0, 68, 68);  //was 68
     
-    if(viewerName != null) {
-    	s = "This TNT Glitch brought to you by: "+viewerName;
-    	fr.drawString(s, 0, fr.FONT_HEIGHT + 2 + 68, 0xFF0000);  //red string
-    	//mc.ingameGUI.getChatGUI().drawString(fr, s, 0, fr.FONT_HEIGHT + 25 + 68, 0x00FF00);
-    	
-    	//mc.ingameGUI.getChatGUI().printChatMessage(p_146227_1_);
-    }
+//    if(viewerName != null) {
+//    	s = "This TNT Glitch brought to you by: "+viewerName;
+//    	fr.drawString(s, 0, fr.FONT_HEIGHT + 2 + 68, 0xFF0000);  //red string
+//    	//mc.ingameGUI.getChatGUI().drawString(fr, s, 0, fr.FONT_HEIGHT + 25 + 68, 0x00FF00);
+//    	
+//    	//mc.ingameGUI.getChatGUI().printChatMessage(p_146227_1_);
+//    }
     
     GL11.glPopMatrix(); //Mike
     GL11.glPopAttrib();
