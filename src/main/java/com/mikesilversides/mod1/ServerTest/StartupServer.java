@@ -20,6 +20,13 @@ public class StartupServer {
 		  
 		// register your event handler in main class during init or postinit:
 		  FMLCommonHandler.instance().bus().register(new EventHandlerTick());
+		  
+		  try {
+			EchoClient.init();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	  }
 
 	  public static void postInitServer()
