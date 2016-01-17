@@ -1,4 +1,5 @@
 msg.message_name.txt=Hello From Server. Have a pig!
+msg.login.txt=Hello from server. Get ready to run!
 tile.mbe01_block_simple.name=MBE01 Block Simple
 tile.mbe02_block_partial.name=MBE02 Block Partial
 tile.mbe03_block_variants.red.name=MBE03 Block Variants Red

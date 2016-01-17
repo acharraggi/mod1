@@ -2,6 +2,7 @@ package com.mikesilversides.mod1.ServerTest;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.network.*;
 
 public class StartupServer {
 
@@ -20,13 +21,21 @@ public class StartupServer {
 		  
 		// register your event handler in main class during init or postinit:
 		  FMLCommonHandler.instance().bus().register(new EventHandlerTick());
-		  
+		  	  
 		  try {
 			EchoClient.init();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+// the following works ok, but starts the StubClient during initialization before player has even connected.
+//			System.out.println("about to start StubClient thread");
+//			Thread t = new Thread(new StubClient());
+//			t.start();
+		  
+
+		  
 	  }
 
 	  public static void postInitServer()

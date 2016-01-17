@@ -144,9 +144,10 @@ public class EventHandlerOverlay
 	    		//Vec3 playerLook = playerIn.getLookVec();
 	    		Vec3 playerLook = Minecraft.getMinecraft().thePlayer.getLookVec();
 	    	    Vec3 playerFeetPosition = Minecraft.getMinecraft().thePlayer.getPositionEyes(PARTIAL_TICKS).subtract(0, Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0);
-	    	    final double TARGET_DISTANCE = 5.0;
-	    	    final double HEIGHT_ABOVE_FEET = 0.1;
-	    	    targetLocation = playerFeetPosition;
+	    	    targetLocation = playerFeetPosition.addVector(playerLook.xCoord * 2, 0, playerLook.zCoord * 2);
+//	    	    final double TARGET_DISTANCE = 5.0;
+//	    	    final double HEIGHT_ABOVE_FEET = 0.1;
+//	    	    targetLocation = playerFeetPosition;
 //	    	    targetLocation = playerFeetPosition.addVector(playerLook.xCoord * TARGET_DISTANCE, HEIGHT_ABOVE_FEET,
 //	    	                                                       playerLook.zCoord * TARGET_DISTANCE);
 	    	//}
@@ -154,13 +155,10 @@ public class EventHandlerOverlay
     	    AirstrikeMessageToServer.Projectile [] choices = AirstrikeMessageToServer.Projectile.values();
     	    AirstrikeMessageToServer.Projectile projectile = choices[2];  //0=pig, 1=snowball, 2=PrimedTNT, 4=egg
 
-    	    AirstrikeMessageToServer airstrikeMessageToServer = new AirstrikeMessageToServer(projectile, targetLocation);
-    	    com.mikesilversides.mod1.airstrike.StartupCommon.simpleNetworkWrapper.sendToServer(airstrikeMessageToServer);
-    	    
-    	    // initiate viewer name display
-    	    //viewerName = "Spanky";
-    	    //startNameTime = Minecraft.getMinecraft().getSystemTime();
-    	    Minecraft.getMinecraft().thePlayer.sendChatMessage("This TNT Glitch brought to you by: Spanky");
+    	    // following commented out to stop the TNT drops from spanky
+//    	    AirstrikeMessageToServer airstrikeMessageToServer = new AirstrikeMessageToServer(projectile, targetLocation);
+//    	    com.mikesilversides.mod1.airstrike.StartupCommon.simpleNetworkWrapper.sendToServer(airstrikeMessageToServer);
+//    	    Minecraft.getMinecraft().thePlayer.sendChatMessage("This TNT Glitch brought to you by: Spanky");
     	}
     	
 //    	if(startNameTime > 0) {
