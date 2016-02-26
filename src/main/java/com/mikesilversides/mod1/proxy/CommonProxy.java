@@ -11,7 +11,9 @@ public abstract class CommonProxy {
 		  com.mikesilversides.mod1.mbe70_configuration.StartupCommon.preInitCommon();
 		  com.mikesilversides.mod1.hud_overlay.StartupCommon.preInitCommon();
 		  com.mikesilversides.mod1.airstrike.StartupCommon.preInitCommon();
-		  com.mikesilversides.mod1.ServerTest.StartupServer.preInitServer();
+		  
+		  // turn off netty echoClient test
+		  //com.mikesilversides.mod1.ServerTest.StartupServer.preInitServer();
 	  }
 	  
 	  /**
@@ -23,7 +25,11 @@ public abstract class CommonProxy {
 		  com.mikesilversides.mod1.mbe70_configuration.StartupCommon.initCommon();
 		  com.mikesilversides.mod1.hud_overlay.StartupCommon.initCommon();
 		  com.mikesilversides.mod1.airstrike.StartupCommon.initCommon();
-		  com.mikesilversides.mod1.ServerTest.StartupServer.initServer();
+		  
+		  //com.mikesilversides.mod1.ServerTest.StartupServer.initServer();
+		  
+		  //temp code - try using Retrofit
+		  com.mikesilversides.mod1.proxy.testRetrofit.test1();
 	  }
 	  
 	  /**
@@ -34,7 +40,8 @@ public abstract class CommonProxy {
 		  com.mikesilversides.mod1.mbe70_configuration.StartupCommon.postInitCommon();
 		  com.mikesilversides.mod1.hud_overlay.StartupCommon.postInitCommon();
 		  com.mikesilversides.mod1.airstrike.StartupCommon.postInitCommon();
-		  com.mikesilversides.mod1.ServerTest.StartupServer.postInitServer();
+		 
+		  //com.mikesilversides.mod1.ServerTest.StartupServer.postInitServer();
 	  }
 	  
 	  // helper to determine whether the given player is in creative mode
